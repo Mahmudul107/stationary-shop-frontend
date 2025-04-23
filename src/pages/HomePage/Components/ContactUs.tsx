@@ -23,29 +23,54 @@ const ContactSection = () => {
 
         <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Info + Why Reach Out */}
-          <div className="space-y-6 flex items-center">
+          {/* Why Reach Out Section */}
+{/* Why Reach Out Section */}
+<Card className="bg-white shadow-md rounded-2xl border-none">
+  <CardHeader>
+    <CardTitle className="text-green-800 text-xl">Why Reach Out?</CardTitle>
+  </CardHeader>
+  <CardContent className="text-gray-700 space-y-5">
+    <div className="flex items-start gap-3">
+      <PackageSearch className="h-5 w-5 text-green-700 mt-1" />
+      <div>
+        <p className="font-semibold">Order Questions & Support</p>
+        <p className="text-sm text-gray-600">
+          Wondering where your order is or need help with a recent purchase? We’re happy to assist with updates,
+          tracking, or anything else you need.
+        </p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <PenTool className="h-5 w-5 text-green-700 mt-1" />
+      <div>
+        <p className="font-semibold">Custom Design Requests</p>
+        <p className="text-sm text-gray-600">
+          Looking for personalized stationery that reflects your style or brand? Share your ideas — we’ll bring them to life with care and creativity.
+        </p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <Smile className="h-5 w-5 text-green-700 mt-1" />
+      <div>
+        <p className="font-semibold">Feedback & Suggestions</p>
+        <p className="text-sm text-gray-600">
+          Your thoughts make us better. Whether it’s praise, constructive feedback, or improvement ideas — we’re all ears!
+        </p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <Send className="h-5 w-5 text-green-700 mt-1" />
+      <div>
+        <p className="font-semibold">General Inquiries or Just Saying Hi</p>
+        <p className="text-sm text-gray-600">
+          Curious about our brand, our story, or have something else on your mind? Even if it’s just a friendly hello — we’d love to hear from you.
+        </p>
+      </div>
+    </div>
+  </CardContent>
+</Card>
 
-            {/* Why Reach Out Section */}
-            <Card className="bg-white shadow-md rounded-2xl border-none">
-              <CardHeader>
-                <CardTitle className="text-green-800 text-xl">Why Reach Out?</CardTitle>
-              </CardHeader>
-              <CardContent className="text-gray-700 space-y-4">
-                <div className="flex items-start gap-3">
-                  <PackageSearch className="h-5 w-5 text-green-700 mt-1" />
-                  <p>Track or ask about your orders</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <PenTool className="h-5 w-5 text-green-700 mt-1" />
-                  <p>Request custom stationery designs</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Smile className="h-5 w-5 text-green-700 mt-1" />
-                  <p>Share feedback or say hello — we love hearing from you!</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+
 
           {/* Contact Form */}
           <Card className="bg-white shadow-md rounded-2xl border-none">

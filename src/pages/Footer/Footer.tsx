@@ -1,4 +1,5 @@
-import LeafandLineLogo from '../../assets/LeafandLine.png' // Adjust the import path as necessary
+import { Facebook, Instagram, Youtube } from 'lucide-react';
+import LeafandLineLogo from '../../assets/LeafandLine.png' 
 
 const Footer = () => {
     return (
@@ -17,9 +18,9 @@ const Footer = () => {
                 </p>
   
                 <div className="flex mt-4 -mx-2">
-                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-blue-500" aria-label="Facebook">Facebook</a>
-                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-blue-500" aria-label="Instagram">Instagram</a>
-                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-blue-500" aria-label="YouTube">YouTube</a>
+                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-green-700" aria-label="Facebook"><Facebook/></a>
+                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-green-700" aria-label="Instagram"><Instagram/></a>
+                  <a href="#" className="mx-2 text-gray-600 dark:text-gray-300 hover:text-green-700" aria-label="YouTube"><Youtube/></a>
                 </div>
               </div>
             </div>
@@ -28,23 +29,23 @@ const Footer = () => {
               <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
                 <div>
                   <h3 className="text-gray-700 uppercase dark:text-white font-semibold tracking-widest">About</h3>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Company</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Community</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Careers</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Company</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Community</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Careers</a>
                 </div>
   
                 <div>
                   <h3 className="text-gray-700 uppercase dark:text-white font-semibold tracking-widest">Blog</h3>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Tech</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Nature</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Lifestyle</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Tech</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Nature</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Lifestyle</a>
                 </div>
   
                 <div>
                   <h3 className="text-gray-700 uppercase dark:text-white font-semibold tracking-widest">Help</h3>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Support</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">Contact</a>
-                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-blue-500 after:transition-all after:duration-300">FAQs</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Support</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">Contact</a>
+                  <a href="#" className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-green-700 transition-all duration-300 ease-in-out relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-green-500 after:transition-all after:duration-300">FAQs</a>
                 </div>
   
                 <div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,7 +33,8 @@ interface UserRegistration {
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [register] = useRegisterUserMutation();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
   const registrationForm = useForm<UserRegistration>({
@@ -43,6 +45,20 @@ const Register = () => {
       password: "",
     },
   });
+
+  const onSubmit = async (data: UserRegistration) => {
+    setErrorMsg("");
+    console.log("Submitted Data:", data);
+    try {
+      const res = await registerUser(data).unwrap();
+      console.log("API Response:", res); //
+      navigate("/login");
+    } catch (err: any) {
+      console.error("Registration Error:", err);
+      setErrorMsg(err?.data?.message || "Something went wrong");
+    }
+  };
+  
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#F5F1EA] px-4 py-10">
@@ -58,7 +74,7 @@ const Register = () => {
 
         <CardContent>
           <Form {...registrationForm}>
-            <form className="space-y-5">
+            <form onSubmit={registrationForm.handleSubmit(onSubmit)} className="space-y-5">
               {/* Name field */}
               <FormField
                 control={registrationForm.control}
@@ -68,11 +84,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel className="text-[#333]">Full Name</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder="Drop your name here"
-                      />
+                      <Input {...field} type="text" placeholder="Drop your name here" />
                     </FormControl>
                     <FormMessage className="text-red-500" />
                   </FormItem>
@@ -94,11 +106,7 @@ const Register = () => {
                   <FormItem>
                     <FormLabel className="text-[#333]">Email Address</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="you@example.com"
-                      />
+                      <Input {...field} type="email" placeholder="you@example.com" />
                     </FormControl>
                     <FormMessage className="text-red-500" />
                   </FormItem>
@@ -133,14 +141,19 @@ const Register = () => {
                 )}
               />
 
+              {/* Error message */}
+              {errorMsg && (
+                <p className="text-center text-red-500 font-medium">{errorMsg}</p>
+              )}
+
               {/* Submit Button */}
               <DialogFooter className="mt-6">
                 <Button
                   type="submit"
-                  disabled={!registrationForm.formState.isValid}
+                  disabled={!registrationForm.formState.isValid || isLoading}
                   className="w-full bg-[#2F5233] text-white hover:bg-[#D8A7B1] font-semibold transition"
                 >
-                  Sign Up
+                  {isLoading ? "Creating..." : "Sign Up"}
                 </Button>
               </DialogFooter>
             </form>
@@ -148,9 +161,7 @@ const Register = () => {
         </CardContent>
 
         <CardFooter className="flex flex-col gap-2 text-center">
-          <p className="text-sm text-[#333] font-medium">
-            Already have an account?
-          </p>
+          <p className="text-sm text-[#333] font-medium">Already have an account?</p>
           <Link
             to="/login"
             className="text-sm font-semibold text-[#D8A7B1] hover:underline"

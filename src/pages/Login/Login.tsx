@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { EyeClosed, EyeIcon } from "lucide-react";
-import { toast } from "sonner";
+import { EyeIcon, EyeClosed } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import {
   Form,
   FormField,
@@ -14,30 +22,27 @@ import {
   FormMessage,
   FormControl,
 } from "@/components/ui/form";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { DialogFooter } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
-// Replace this with your actual login logic
-// import { loginUser } from "@/redux/features/auth/authApi";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { verifyToken } from "@/utils/verfiyToken";
+import { setUser } from "@/redux/features/auth/authSlice";
 
-interface LoginDialogProps {
+type LoginFormInputs = {
   email: string;
   password: string;
-}
+};
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [login, { isLoading }] = useLoginMutation();
+  const [errorMsg, setErrorMsg] = useState("");
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [showPass, setShowPass] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<LoginDialogProps>({
+  const form = useForm<LoginFormInputs>({
     mode: "onTouched",
     defaultValues: {
       email: "",
@@ -45,82 +50,56 @@ const Login = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginDialogProps> = async (data) => {
-    setIsLoading(true);
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
-      // Simulating API response — replace with real login
-      const mockResponse = {
-        success: true,
-        message: "Logged in successfully!",
-      };
+      const res = await login(data).unwrap();
+      console.log("✅ LOGIN SUCCESS:", res);
 
-      if (!mockResponse.success) {
-        form.setError("password", {
-          type: "manual",
-          message: mockResponse.message || "Login failed. Try again.",
-        });
-        return;
-      }
+      const user = verifyToken(res.token);
+      dispatch(setUser({ user, token: res.token }));
 
-      toast.success(mockResponse.message, {
-        duration: 1500,
-        description: "Welcome back!",
-      });
-
+      toast.success("Login successful", { duration: 1500 });
       form.reset();
       navigate("/");
-
     } catch (error: any) {
-      console.error(error);
-      toast.error(error?.data?.message || "Something went wrong!");
-    } finally {
-      setIsLoading(false);
+      console.error("❌ LOGIN ERROR:", error);
+      setErrorMsg(
+        error?.data?.message || "Login failed. Please try again."
+      );
+      toast.error("Login failed. Please try again.");
     }
   };
 
   return (
-    <main className="flex h-screen items-center justify-center bg-[#F5F1EA] px-5 py-8">
-      <Card className="w-full max-w-md rounded-2xl shadow-md border-none">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-extrabold text-[#2F5233] uppercase">
-            Login
+    <main className="flex min-h-screen items-center justify-center bg-[#F5F1EA] px-4 py-10">
+      <Card className="w-full max-w-lg rounded-2xl shadow-md border-none">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-3xl font-extrabold text-[#2F5233] text-center uppercase">
+            Welcome Back
           </CardTitle>
-          <CardDescription className="text-sm text-[#333]">
-            Access your Leaf & Line account
+          <CardDescription className="text-center text-sm text-[#333]">
+            Login to your Leaf & Line account
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              {/* Email */}
               <FormField
                 control={form.control}
                 name="email"
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Enter a valid email address",
-                  },
-                }}
+                rules={{ required: "Email is required" }}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[#333]">Email Address</FormLabel>
+                    <FormLabel className="text-[#333]">Email</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="you@example.com"
-                        className="font-medium"
-                      />
+                      <Input {...field} type="email" placeholder="you@example.com" />
                     </FormControl>
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
 
-              {/* Password */}
               <FormField
                 control={form.control}
                 name="password"
@@ -132,16 +111,15 @@ const Login = () => {
                       <div className="relative">
                         <Input
                           {...field}
-                          type={showPass ? "text" : "password"}
+                          type={showPassword ? "text" : "password"}
                           placeholder="••••••••"
-                          className="font-medium"
                         />
-                        <div
-                          onClick={() => setShowPass(!showPass)}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-[#2F5233]"
+                        <span
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-[#2F5233]"
                         >
-                          {showPass ? <EyeIcon /> : <EyeClosed />}
-                        </div>
+                          {showPassword ? <EyeIcon /> : <EyeClosed />}
+                        </span>
                       </div>
                     </FormControl>
                     <FormMessage className="text-red-500" />
@@ -149,7 +127,10 @@ const Login = () => {
                 )}
               />
 
-              {/* Submit */}
+              {errorMsg && (
+                <p className="text-center text-red-500 font-medium">{errorMsg}</p>
+              )}
+
               <DialogFooter className="mt-6">
                 <Button
                   type="submit"
@@ -164,14 +145,12 @@ const Login = () => {
         </CardContent>
 
         <CardFooter className="flex flex-col gap-2 text-center">
-          <p className="text-sm text-[#333] font-medium">
-            Don&apos;t have an account?
-          </p>
+          <p className="text-sm text-[#333] font-medium">Don't have an account?</p>
           <Link
             to="/register"
             className="text-sm font-semibold text-[#D8A7B1] hover:underline"
           >
-            Register
+            Create one here
           </Link>
         </CardFooter>
       </Card>

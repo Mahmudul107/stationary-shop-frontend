@@ -13,7 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function AboutUs() {
   return (
-    <main className="min-h-screen px-6 py-16 md:px-12 bg-[#F5F1EA] text-[#2F5233]">
+    <main className="min-h-screen px-6 py-16 md:px-12 bg-[#f9f7f3] text-[#2F5233]">
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto text-center space-y-4 mb-20">
         <h1 className="text-5xl font-extrabold uppercase">About Leaf & Line</h1>

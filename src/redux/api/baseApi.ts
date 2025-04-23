@@ -11,7 +11,7 @@ import type {
 import { TOrder, TProduct, TResponse } from "@/types";
   
   const baseQuery = fetchBaseQuery({
-	baseUrl: "http://localhost:5000/api/a4",
+	baseUrl: "http://localhost:5000/api/",
 	credentials: "include",
 	prepareHeaders: (headers, { getState }) => {
 	  const { token } = (getState() as RootState).login;
