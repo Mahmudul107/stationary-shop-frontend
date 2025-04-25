@@ -51,6 +51,7 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    console.log(data, "data");
     try {
       const res = await login(data).unwrap();
       console.log("✅ LOGIN SUCCESS:", res);

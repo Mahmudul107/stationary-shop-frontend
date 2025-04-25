@@ -1,20 +1,19 @@
-export const uploadImageToCloudinary = async (image: File) => {
-  
-    const preset_key = "assignment-4";
-    const cloud_name = "difnonimq";
-    const formData = new FormData();
-  
-  
-    formData.append("file", image);
-    formData.append("upload_preset", preset_key);
-    
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const result = await res.json();
-    return result.secure_url;
-  };
+import axios from "axios";
+
+const image_api_key = "4702e2025098c08b81b178bc74cb4784"
+const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
+
+// Image upload with abort signal support
+export const imageUpload = async (
+  image: string | Blob,
+  options?: { signal?: AbortSignal }
+) => {
+  const formData = new FormData();
+  formData.append("image", image);
+
+  const { data } = await axios.post(image_hosting_url, formData, {
+    signal: options?.signal
+  });
+
+  return data;
+};

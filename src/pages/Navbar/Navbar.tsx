@@ -16,6 +16,8 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
   const user = useAppSelector(selectUser);
+  console.log("user",user);
+  console.log("Token",token);
   const [open, setOpen] = useState(false);
 
   // Custom button styles for better clarity and reuse

@@ -11,7 +11,7 @@ import type {
 import { TOrder, TProduct, TResponse } from "@/types";
   
   const baseQuery = fetchBaseQuery({
-	baseUrl: "http://localhost:5000/api/",
+	baseUrl: "http://localhost:5000/api",
 	credentials: "include",
 	prepareHeaders: (headers, { getState }) => {
 	  const { token } = (getState() as RootState).login;
@@ -43,7 +43,7 @@ import { TOrder, TProduct, TResponse } from "@/types";
 	}
 	if (result?.error && result?.error?.status === 401) {
 	  const res = await fetch(
-		"http://localhost:5000/api/a4/auth/refreshToken",
+		"http://localhost:5000/api/auth/refreshToken",
 		{
 		  method: "POST",
 		  credentials: "include",

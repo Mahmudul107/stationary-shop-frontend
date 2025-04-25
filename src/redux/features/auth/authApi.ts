@@ -19,11 +19,18 @@ const authApi = baseApi.injectEndpoints({
 
     getUser: builder.query({
       query: () => ({
-        url: "/auth/user",
+        url: "/user",
         method: "GET",
+      }),
+    }),
+    createProduct: builder.mutation({
+      query: (formData: FormData) => ({
+        url: "/product/create-product",
+        method: "POST",
+        body: formData,
       }),
     }),
   }),
 });
-export const { useLoginMutation, useRegisterUserMutation, useGetUserQuery } =
+export const { useLoginMutation, useRegisterUserMutation, useGetUserQuery: useGetCurrentUserQuery, useCreateProductMutation } =
   authApi;
