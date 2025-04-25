@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { LogOutIcon } from "lucide-react";
 import { userPaths } from "@/constant/userSidebar.constant";
