@@ -2,8 +2,9 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const productManageMentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllproduct: builder.query({
+    getAllProducts: builder.query({
       query: (args) => {
+        console.log(args);
         const params = new URLSearchParams();
         if (args) {
           args.forEach((element: { name: string; value: string }) => {
@@ -14,17 +15,18 @@ const productManageMentApi = baseApi.injectEndpoints({
         return {
           url: "/products",
           method: "GET",
-          params: args[0].name && params,
+          params: params,
         };
       },
     }),
     createProduct: builder.mutation({
-      query: (product) => ({
-        url: "/product/create-Product",
+      query: (data) => ({
+        url: "/product/create-product",
         method: "POST",
-        body: product,
+        body: data,
       }),
     }),
+
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `/product/delete-Product/${productId}`,
@@ -48,7 +50,7 @@ const productManageMentApi = baseApi.injectEndpoints({
   }),
 });
 export const {
-  useGetAllproductQuery,
+  useGetAllProductsQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
   useGetProductQuery,

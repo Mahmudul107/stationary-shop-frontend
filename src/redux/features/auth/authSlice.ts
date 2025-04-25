@@ -1,16 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store";
 
 export type TUser = {
   email: string;
-  role: "user" | "admin";
+  // role: "user" | "admin";
+  role: string;
   iat: number;
   exp: number;
 };
 
 type TAuthState = {
-  user: TUser | null;
-  token: string | null;
+  user: null | TUser;
+  token: null | string;
 };
 
 const initialState: TAuthState = {
@@ -22,10 +23,17 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, { payload }: PayloadAction<TAuthState>) => {
-      state.user = payload.user;
-      state.token = payload.token;
+    // setUser: (state, { payload }: PayloadAction<TAuthState>) => {
+    //   state.user = payload.user;
+    //   state.token = payload.token;
+    // },
+
+    setUser: (state, action) => {
+      const { user, token } = action.payload;
+      state.user = user;
+      state.token = token;
     },
+
     logout: (state) => {
       state.user = null;
       state.token = null;
