@@ -46,9 +46,13 @@ const Register = () => {
     },
   });
 
+  // const onSubmit = async (data: UserRegistration) => {
+  //   console.log("object");
+  // }
+
   const onSubmit = async (data: UserRegistration) => {
     setErrorMsg("");
-    console.log("Submitted Data:", data);
+    // console.log("Submitted Data:", data);
     try {
       const res = await registerUser(data).unwrap();
       console.log("API Response:", res); //
