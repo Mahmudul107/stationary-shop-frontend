@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingBag, ShoppingCart } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   logout,
@@ -16,8 +16,8 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
   const user = useAppSelector(selectUser);
-  console.log("user",user);
-  console.log("Token",token);
+  console.log("user", user);
+  console.log("Token", token);
   const [open, setOpen] = useState(false);
 
   // Custom button styles for better clarity and reuse
@@ -55,6 +55,9 @@ const Navbar = () => {
               Dashboard
             </NavLink>
           )}
+          <NavLink to="/cart" className={navItemClass}>
+            <ShoppingBag />
+          </NavLink>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">

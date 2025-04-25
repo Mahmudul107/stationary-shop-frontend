@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "@/layout/MainLayout"
+import MainLayout from "@/layout/MainLayout";
 import Home from "@/pages/HomePage/Home";
 import Register from "@/pages/Register/Register";
 import Login from "@/pages/Login/Login";
@@ -13,76 +13,90 @@ import UpdateProduct from "@/pages/Dashboard/AdminDashboard/UpdateProduct";
 import ViewOrders from "@/pages/Dashboard/AdminDashboard/ViewOrders";
 import UserDashboard from "@/pages/Dashboard/UserDashboard/UserDashboard";
 import ViewOrder from "@/pages/Dashboard/UserDashboard/ViewOrder";
+import CartPage from "@/pages/HomePage/Components/Cart";
+import Products from "@/pages/AllProducts/AllProducts";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainLayout/>,
-        children: [
-            {
-                index: true,
-                element: <Home/>
-            },
-            {
-                path: '/about',
-                element: <AboutUs/>
-            }
-        ]
-    },
-    {
-        path: "/register",
-        element: <Register/>
-    },
-    {
-        path: "/login",
-        element: <Login/>
-    },
-    {
-        path: "/admin",
-        element: (
-          <ProtectedRoute>
-            <DashboardLayout />
-          </ProtectedRoute>
-        ),
-        children: [
-          {
-            path: "dashboard",
-            element: <AdminDashboard />,
-          },
-          {
-            path: "create-product",
-            element: <CreateProduct />,
-          },
-          {
-            path: "products",
-            element: <ViewProduct />,
-          },
-          {
-            path: "products/update/:productId",
-            element: <UpdateProduct />,
-          },
-          {
-            path: "orders",
-            element: <ViewOrders />,
-          },
-        ],
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
       },
       {
-        path: "/user",
-        element: (
-          <ProtectedRoute>
-            <DashboardLayout />
-          </ProtectedRoute>
-        ),
-        children: [
-          {
-            path: "dashboard",
-            element: <UserDashboard />,
-          },
-          {
-            path: "orders",
-            element: <ViewOrder />,
-          },
-        ],
+        path: "/about",
+        element: <AboutUs />,
       },
-])
+    ],
+  },
+
+  {
+    path: "/register",
+    element: <Register />,
+  },
+
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/products",
+    element: <Products />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
+  },
+
+  {
+    path: "/admin",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "create-product",
+        element: <CreateProduct />,
+      },
+      {
+        path: "products",
+        element: <ViewProduct />,
+      },
+      {
+        path: "products/update/:productId",
+        element: <UpdateProduct />,
+      },
+      {
+        path: "orders",
+        element: <ViewOrders />,
+      },
+    ],
+  },
+
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: <UserDashboard />,
+      },
+      {
+        path: "orders",
+        element: <ViewOrder />,
+      },
+    ],
+  },
+]);

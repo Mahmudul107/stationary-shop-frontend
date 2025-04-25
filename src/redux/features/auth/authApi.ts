@@ -23,14 +23,17 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    createProduct: builder.mutation({
-      query: (formData: FormData) => ({
-        url: "/product/create-product",
-        method: "POST",
-        body: formData,
-      }),
-    }),
+    // createProduct: builder.mutation({
+    //   query: (formData: FormData) => ({
+    //     url: "/product/create-product",
+    //     method: "POST",
+    //     body: formData,
+    //   }),
+    // }),
   }),
 });
-export const { useLoginMutation, useRegisterUserMutation, useGetUserQuery: useGetCurrentUserQuery, useCreateProductMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterUserMutation,
+  useGetUserQuery: useGetCurrentUserQuery,
+} = authApi;

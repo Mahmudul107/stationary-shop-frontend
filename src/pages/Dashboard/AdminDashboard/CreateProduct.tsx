@@ -1,14 +1,47 @@
-
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useCreateProductMutation } from "@/redux/features/auth/admin/productManagement";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateProduct = () => {
+  const [createProduct] = useCreateProductMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const productData = {
+      ...data,
+      name: "",
+      brand: "",
+      model: "",
+      productImg: "",
+      price: "",
+      category: "",
+      description: "",
+      quantity: "",
+      inStock: true,
+    };
+  };
+
   return (
-    <div>
-      <h1>Create Product page</h1>
+    <div className="justify-center items-center">
+      <h1 className="flex justify-center text-3xl font-bold text-blue-500">
+        Create Product
+      </h1>
+
+      <div className="max-w-sm items-center space-y-2">
+        <form className="space-y-2">
+          <Input type="email" placeholder="Item Name" />
+          <Input type="email" placeholder="Price" />
+          <Input type="email" placeholder="Quantity" />
+          <Input type="email" placeholder="Email" />
+          <Button type="submit">Create Product</Button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default CreateProduct;
+
 // import { useForm, SubmitHandler } from "react-hook-form";
 // import { Button } from "@/components/ui/button";
 // import { Card } from "@/components/ui/card";
@@ -64,15 +97,15 @@ export default CreateProduct;
 //       formData.append("description", data.description);
 //       formData.append("quantity", data.quantity.toString());
 //       formData.append("inStock", String(data.inStock));
-  
+
 //       // This assumes you still have the file in a ref or state
 //       const file = fileInputRef.current?.files?.[0];
 //       if (file) {
 //         formData.append("file", file);
 //       }
-  
+
 //       const res = await createProduct(formData).unwrap();
-  
+
 //       if (res.success) {
 //         toast.success(res.message);
 //         form.reset();
@@ -83,7 +116,6 @@ export default CreateProduct;
 //       toast.error(error?.data?.message || "Failed to create product");
 //     }
 //   };
-  
 
 //   return (
 //     <div className="p-6 rounded-2xl bg-[#2F5233] text-white">
