@@ -1,8 +1,10 @@
+import { RootState } from "@/redux/store";
+import { TProduct } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ICartItem {
   _id: string;
-  product: string; // Product ID
+  product: TProduct; // Product ID
   name: string;
   price: number;
   quantity: number;
@@ -36,8 +38,8 @@ const cartSlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
-      state.totalQuantity += action.payload.quantity;
-      state.totalPrice += action.payload.price * action.payload.quantity;
+      // state.totalQuantity += action.payload.quantity;
+      // state.totalPrice += action.payload.price * action.payload.quantity;
     },
     removeFromCart(state, action: PayloadAction<string>) {
       const itemId = action.payload;
@@ -68,6 +70,10 @@ const cartSlice = createSlice({
     },
   },
 });
+
+export const orderedProductsSelector = (state: RootState) => {
+  return state.cart.items;
+};
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } =
   cartSlice.actions;

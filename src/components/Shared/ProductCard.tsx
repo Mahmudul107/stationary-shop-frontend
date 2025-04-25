@@ -1,4 +1,4 @@
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -38,7 +38,7 @@ const ProductCard = ({ product }: { product: ICartItem }) => {
         </CardContent>
         <CardFooter>
           <div className="flex gap-4">
-            <NavLink to={`/products/${product._id}`}>
+            <NavLink to={`/product/${product._id}`}>
               <Button size="sm" className="rounded-full cursor-pointer">
                 View Details
               </Button>
@@ -54,7 +54,7 @@ const ProductCard = ({ product }: { product: ICartItem }) => {
                     // disabled={product?.status === "availabel" ? true : false}
                     onClick={() => handleAddProduct(product)}
                   >
-                    <ShoppingBag />
+                    <ShoppingCart />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
