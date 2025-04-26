@@ -9,6 +9,8 @@ export interface ICartItem {
   price: number;
   quantity: number;
   stock: number;
+  brand: string;
+  description: string;
   imageUrl: string; // Optional: for displaying in the UI
 }
 

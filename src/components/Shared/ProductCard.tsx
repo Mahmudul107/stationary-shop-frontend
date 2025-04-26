@@ -1,4 +1,4 @@
-import { ShoppingBag, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Card,
