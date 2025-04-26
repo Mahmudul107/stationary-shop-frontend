@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Badge, Menu, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingBag } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   logout,

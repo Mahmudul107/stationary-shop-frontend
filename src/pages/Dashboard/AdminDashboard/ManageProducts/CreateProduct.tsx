@@ -1,25 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useCreateProductMutation } from "@/redux/features/auth/admin/productManagement";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+// import { useCreateProductMutation } from "@/redux/features/auth/admin/productManagement";
+// import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateProduct = () => {
-  const [createProduct] = useCreateProductMutation();
+  // const [createProduct] = useCreateProductMutation();
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const productData = {
-      ...data,
-      name: "",
-      brand: "",
-      model: "",
-      productImg: "",
-      price: "",
-      category: "",
-      description: "",
-      quantity: "",
-      inStock: true,
-    };
-  };
+  // const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  //   const productData = {
+  //     ...data,
+  //     name: "",
+  //     brand: "",
+  //     model: "",
+  //     productImg: "",
+  //     price: "",
+  //     category: "",
+  //     description: "",
+  //     quantity: "",
+  //     inStock: true,
+  //   };
+  // };
 
   return (
     <div className="justify-center items-center">

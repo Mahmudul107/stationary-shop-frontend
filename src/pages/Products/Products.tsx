@@ -2,6 +2,7 @@ import ProductCard from "@/components/Shared/ProductCard";
 import Loading from "@/components/spinner/loading";
 import { Button } from "@/components/ui/button";
 import { useGetAllProductsQuery } from "@/redux/features/auth/admin/productManagement";
+import { ICartItem } from "@/redux/features/cart/cartSlice";
 import { TProduct } from "@/types";
 import { NavLink } from "react-router-dom";
 
@@ -22,7 +23,7 @@ const AllProducts = () => {
         <Loading />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-center items-center">
-          {products?.slice(0, 6).map((product: TProduct, idx: number) => (
+          {products?.slice(0, 6).map((product: ICartItem, idx: number) => (
             <ProductCard key={idx} product={product} />
           ))}
         </div>

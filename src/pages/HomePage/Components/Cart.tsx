@@ -6,10 +6,8 @@ import Footer from "@/pages/Footer/Footer";
 import Navbar from "@/pages/Navbar/Navbar";
 import { useCreateOrderMutation } from "@/redux/features/auth/admin/orderManagement";
 import {
-  addressSelector,
   ICartItem,
   orderedProductsSelector,
-  orderSelector,
   subTotalSelector,
   updateAddress,
 } from "@/redux/features/cart/cartSlice";

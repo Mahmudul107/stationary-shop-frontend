@@ -4,6 +4,7 @@ import { useGetAllProductsQuery } from "@/redux/features/auth/admin/productManag
 import { TProduct } from "@/types";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import { ICartItem } from "@/redux/features/cart/cartSlice";
 
 const Products = () => {
   const { isLoading, data } = useGetAllProductsQuery(undefined, {
@@ -21,7 +22,7 @@ const Products = () => {
           <Loading />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-center items-center">
-            {products?.map((product: TProduct, idx: number) => (
+            {products?.map((product: ICartItem, idx: number) => (
               <ProductCard key={idx} product={product} />
             ))}
           </div>
