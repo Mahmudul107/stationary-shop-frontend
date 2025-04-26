@@ -1,14 +1,14 @@
 export type TProduct = {
   [x: string]: any;
+  name: string;
   _id: string;
   brand: string;
   model: string;
-  name: string;
   price: number;
   category: string;
-  productImg: string;
+  imageUrl: string;
   description: string;
   quantity: number;
-  inStock: boolean;
+  stock: boolean;
   isDeleted: boolean;
 };

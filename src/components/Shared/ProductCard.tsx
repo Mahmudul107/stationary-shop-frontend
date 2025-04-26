@@ -1,4 +1,4 @@
-import { ShoppingBag, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -18,6 +18,7 @@ import {
 
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart, ICartItem } from "@/redux/features/cart/cartSlice";
+import cartImage from "@/assets/LeafandLine.png";
 
 const ProductCard = ({ product }: { product: ICartItem }) => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ const ProductCard = ({ product }: { product: ICartItem }) => {
     <div className="">
       <Card className="bg-green-100">
         <CardHeader>
-          <img src={product.imageUrl} alt="product image" />
+          <img src={cartImage} alt="product image" />
         </CardHeader>
         <CardContent>
           <CardTitle className="mb-5">{product.name}</CardTitle>

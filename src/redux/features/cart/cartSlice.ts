@@ -1,81 +1,109 @@
 import { RootState } from "@/redux/store";
 import { TProduct } from "@/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export interface ICartItem {
-  _id: string;
-  product: TProduct; // Product ID
-  name: string;
-  price: number;
-  quantity: number;
-  stock: number;
-  imageUrl: string; // Optional: for displaying in the UI
+export interface ICartItem extends TProduct {
+  orderQuantity: number;
 }
 
 interface CartState {
   items: ICartItem[];
   totalQuantity: number;
   totalPrice: number;
+  address: string;
 }
 
 const initialState: CartState = {
   items: [],
   totalQuantity: 0,
   totalPrice: 0,
+  address: "",
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action: PayloadAction<ICartItem>) {
-      console.log({ state: state.items });
-      const existingItem = state.items.find(
-        (item) => item.product === action.payload.product
+    addToCart: (state, action) => {
+      const productToAdd = state.items.find(
+        (product) => product._id === action.payload._id
       );
-      if (existingItem) {
-        existingItem.quantity += action.payload.quantity;
-      } else {
-        state.items.push(action.payload);
+
+      if (productToAdd) {
+        productToAdd.orderQuantity += 1;
+        return;
       }
-      // state.totalQuantity += action.payload.quantity;
-      // state.totalPrice += action.payload.price * action.payload.quantity;
+      state.items.push({ ...action.payload, orderQuantity: 1 });
     },
-    removeFromCart(state, action: PayloadAction<string>) {
-      const itemId = action.payload;
-      const existingItem = state.items.find((item) => item.product === itemId);
-      if (existingItem) {
-        state.totalQuantity -= existingItem.quantity;
-        state.totalPrice -= existingItem.price * existingItem.quantity;
-        state.items = state.items.filter((item) => item.product !== itemId);
-      }
-    },
-    updateQuantity(
-      state,
-      action: PayloadAction<{ id: string; quantity: number }>
-    ) {
-      const { id, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item.product === id);
-      if (existingItem && quantity > 0) {
-        const quantityDifference = quantity - existingItem.quantity;
-        existingItem.quantity = quantity;
-        state.totalQuantity += quantityDifference;
-        state.totalPrice += quantityDifference * existingItem.price;
+
+    incrementOrderQuantity: (state, action) => {
+      const productToIncrement = state.items.find(
+        (product) => product._id === action.payload
+      );
+
+      if (productToIncrement) {
+        productToIncrement.orderQuantity += 1;
+        return;
       }
     },
-    clearCart(state) {
+    decrementOrderQuantity: (state, action) => {
+      const productToDecrement = state.items.find(
+        (product) => product._id === action.payload
+      );
+
+      if (productToDecrement && productToDecrement.orderQuantity > 1) {
+        productToDecrement.orderQuantity -= 1;
+        return;
+      }
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(
+        (product) => product._id !== action.payload
+      );
+    },
+
+    updateAddress: (state, action) => {
+      state.address = action.payload;
+    },
+
+    clearCart: (state) => {
       state.items = [];
-      state.totalQuantity = 0;
-      state.totalPrice = 0;
+      state.address = "";
     },
   },
 });
 
+export const subTotalSelector = (state: RootState) => {
+  return state.cart.items.reduce((acc, product) => {
+    return acc + product.price * product.orderQuantity;
+  }, 0);
+};
+
+export const orderSelector = (state: RootState) => {
+  return {
+    products: state.cart.items.map((product) => ({
+      product: product._id,
+      quantity: product.orderQuantity,
+    })),
+    address: `${state.cart.address}`,
+    paymentMethod: "Online",
+  };
+};
+
 export const orderedProductsSelector = (state: RootState) => {
   return state.cart.items;
 };
+export const addressSelector = (state: RootState) => {
+  return state.cart.address;
+};
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  incrementOrderQuantity,
+  decrementOrderQuantity,
+  removeFromCart,
+  updateAddress,
+  clearCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

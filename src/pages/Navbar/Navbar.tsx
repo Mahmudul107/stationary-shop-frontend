@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Badge, Menu, ShoppingBag, ShoppingCart } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   logout,
@@ -16,9 +16,11 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
   const user = useAppSelector(selectUser);
-  console.log("user", user);
-  console.log("Token", token);
+  // console.log("user", user);
+  // console.log("Token", token);
   const [open, setOpen] = useState(false);
+
+  const cartData = useAppSelector((state) => state.cart);
 
   // Custom button styles for better clarity and reuse
   const navItemClass = ({ isActive }: { isActive: boolean }) =>
@@ -56,7 +58,10 @@ const Navbar = () => {
             </NavLink>
           )}
           <NavLink to="/cart" className={navItemClass}>
-            <ShoppingBag />
+            <ShoppingBag className="relative" />
+            <span className="absolute right-0 bottom-4 bg-red-600 text-white rounded-full p-1">
+              {cartData.totalQuantity}
+            </span>
           </NavLink>
         </div>
 
