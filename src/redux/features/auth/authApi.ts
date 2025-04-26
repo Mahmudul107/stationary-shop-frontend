@@ -23,13 +23,6 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    // createProduct: builder.mutation({
-    //   query: (formData: FormData) => ({
-    //     url: "/product/create-product",
-    //     method: "POST",
-    //     body: formData,
-    //   }),
-    // }),
   }),
 });
 export const {

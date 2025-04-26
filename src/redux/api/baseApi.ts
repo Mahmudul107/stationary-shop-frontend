@@ -11,7 +11,7 @@ import { RootState } from "../store";
 import { TOrder, TProduct, TResponse } from "@/types";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://stationary-backend-teal.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const { token } = (getState() as RootState).login;
@@ -42,10 +42,13 @@ const baseQueryWithReauth: BaseQueryFn<
     });
   }
   if (result?.error && result?.error?.status === 401) {
-    const res = await fetch("http://localhost:5000/api/auth/refreshToken", {
-      method: "POST",
-      credentials: "include",
-    });
+    const res = await fetch(
+      "https://stationary-backend-teal.vercel.app/api/auth/refreshToken",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
     const refreshResults = await res.json();
     if (refreshResults?.data?.token) {
       const currentUser = (api.getState() as RootState).login.user;
