@@ -4,12 +4,14 @@ import { useGetAllProductsQuery } from "@/redux/features/auth/admin/productManag
 import { TProduct } from "@/types";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import { ICartItem } from "@/redux/features/cart/cartSlice";
 
 const Products = () => {
   const { isLoading, data } = useGetAllProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   const products: TProduct = data?.data || [];
+
   return (
     <div>
       <Navbar />
@@ -20,10 +22,12 @@ const Products = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-center items-center">
-            {products?.map((product: TProduct, idx: number) => (
-              <ProductCard key={idx} product={product} />
-            ))}
+          <div className="max-w-6xl mx-auto px-4 mt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {products?.map((product: ICartItem) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
           </div>
         )}
       </div>

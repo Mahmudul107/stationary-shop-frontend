@@ -15,6 +15,7 @@ import UserDashboard from "@/pages/Dashboard/UserDashboard/UserDashboard";
 import ViewOrder from "@/pages/Dashboard/UserDashboard/ViewOrder";
 import CartPage from "@/pages/HomePage/Components/Cart";
 import Products from "@/pages/AllProducts/AllProducts";
+import ViewDetails from "@/pages/AllProducts/SingleProduct/ViewDetails";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/product/:productId",
+        element: <ViewDetails />,
       },
     ],
   },
@@ -75,7 +80,7 @@ export const router = createBrowserRouter([
         element: <ViewProduct />,
       },
       {
-        path: "products/update/:productId",
+        path: "product/update/:productId",
         element: <UpdateProduct />,
       },
       {
