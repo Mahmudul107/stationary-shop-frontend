@@ -5,12 +5,14 @@ import { TProduct } from "@/types";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { ICartItem } from "@/redux/features/cart/cartSlice";
+import { ICartItem } from "@/redux/features/cart/cartSlice";
 
 const Products = () => {
   const { isLoading, data } = useGetAllProductsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   const products: TProduct = data?.data || [];
+
   return (
     <div>
       <Navbar />

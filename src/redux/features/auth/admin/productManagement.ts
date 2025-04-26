@@ -29,20 +29,20 @@ const productManageMentApi = baseApi.injectEndpoints({
 
     deleteProduct: builder.mutation({
       query: (productId) => ({
-        url: `/product/delete-Product/${productId}`,
+        url: `/product/${productId}`,
         method: "DELETE",
       }),
     }),
     getProduct: builder.query({
       query: (productId) => ({
-        url: `/product/single-Product/${productId}`,
+        url: `/product/${productId}`,
         method: "GET",
       }),
     }),
 
     updateProduct: builder.mutation({
       query: ({ productId, ...productData }) => ({
-        url: `/product/update-Product/${productId}`,
+        url: `/product/update/${productId}`,
         method: "PATCH",
         body: productData,
       }),
